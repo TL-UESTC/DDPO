@@ -10,7 +10,9 @@ Abstract: In online advertising, the sample selection bias problem is a major ca
 
 ## Datasets
 
-The processed datasets can be downloaded from [Google Drive](https://drive.google.com/drive/folders/1mWuo1Oin8yCf_-Xq8c8IqjslXccNp0dl?usp=drive_link).
+The processed Ali-CCP and Tencent datasets can be downloaded from [Google Drive](https://drive.google.com/drive/folders/1mWuo1Oin8yCf_-Xq8c8IqjslXccNp0dl?usp=drive_link).
+
+The AliExpress dataset can be download from [MTReclib](https://github.com/easezyc/Multitask-Recommendation-Library).
 
 You can put the downloaded datasets in `./data/`.
 
