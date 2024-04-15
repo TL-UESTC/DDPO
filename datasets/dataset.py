@@ -28,8 +28,7 @@ class AliExpressDataset(torch.utils.data.Dataset):
     
 class AliCCPDataset(torch.utils.data.Dataset):
     """
-    AliExpress Dataset
-    This is a dataset gathered from real-world traffic logs of the search system in AliCPP.
+    AliCCP Dataset
     """
 
     def __init__(self, dataset_path):
@@ -48,8 +47,8 @@ class AliCCPDataset(torch.utils.data.Dataset):
 
 class IndustrialDataset(torch.utils.data.Dataset):
     """
-    AliExpress Dataset
-    This is a dataset gathered from real-world traffic logs of the search system in Tencent.
+    Industrial Dataset
+    This is a dataset gathered from real-world traffic logs of the advertising system in Tencent.
     """
 
     def __init__(self, dataset_path):
