@@ -23,13 +23,17 @@ You can put the downloaded datasets in `./data/`.
 * pandas
 * numpy
 * tqdm
+You can create a environment with conda：
+```
+conda env create -f environment.yml
+```
 
 ## Run
 
-You can run the test code:
+You can run the training code:
 
 ```bash
-python main.py --model_name ddpo
+python main.py --model_name ddpo --dataset_name [ccp|industrial|AliExpress_NL|AliExpress_ES|AliExpress_US|AliExpress_FR]
 ```
 
 ## Acknowledgement
