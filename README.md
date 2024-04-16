@@ -24,9 +24,9 @@ You can put the downloaded datasets in `./data/`.
 * numpy
 * tqdm
 
-You can create a environment with conda：
+You can create the environment with conda：
 ```
-conda env create -f environment.yml
+conda env create -f environments.yml
 ```
 
 ## Run
