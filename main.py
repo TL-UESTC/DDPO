@@ -193,12 +193,25 @@ def main(dataset_name,
     train_dataset = get_dataset(dataset_name, os.path.join(dataset_path, dataset_name) + '/train.csv')
     test_dataset = get_dataset(dataset_name, os.path.join(dataset_path, dataset_name) + '/test.csv')
     test_data_loader = DataLoader(test_dataset, batch_size=batch_size, num_workers=4, shuffle=False)
+    train_data_loader = DataLoader(train_dataset, batch_size=batch_size, num_workers=4, shuffle=True)
 
     field_dims = train_dataset.field_dims
     numerical_num = train_dataset.numerical_num
     model = get_model(model_name, field_dims, numerical_num, task_num, expert_num, embed_dim).to(device)
-    load_path=f'{save_dir}/{dataset_name}_{model_name}.pt'
-
+    criterion = torch.nn.BCELoss(reduction='none')
+    optimizer = torch.optim.Adam(params=model.parameters(), lr=learning_rate, weight_decay=weight_decay)
+    save_path=f'{save_dir}/{dataset_name}_{model_name}.pt'
+    early_stopper = EarlyStopper(num_trials=2, save_path=save_path)
+    for epoch_i in range(epoch):
+        train(model, optimizer, train_data_loader, criterion, device,parao,parac,parar,paract)
+        auc, loss = test(model, test_data_loader, task_num, device)
+        print('epoch:', epoch_i, 'test: auc:', auc)
+        for i in range(task_num):
+            print('task {}, AUC {}, Log-loss {}'.format(i, auc[i], loss[i]))
+        if not early_stopper.is_continuable(model, np.array(auc[1]).mean()):
+            print(f'test: best auc: {early_stopper.best_accuracy}')
+            break
+             
     model.load_state_dict(torch.load(load_path))
     auc, loss = test(model, test_data_loader, task_num, device)
     f = open('{}_{}.txt'.format(model_name, dataset_name), 'a', encoding = 'utf-8')
